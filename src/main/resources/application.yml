@@ -22,6 +22,9 @@ spring:
       hibernate:
         show-sql: true
     defer-datasource-initialization: true
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
 server:
   servlet:
     context-path: /api

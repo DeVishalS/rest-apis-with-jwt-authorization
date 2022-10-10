@@ -16,4 +16,6 @@ public interface SubjectService {
     Subject updateSubject(Subject oldSubject, Subject newSubject);
 
     void deleteSubjectById(Long id);
+
+    List<Subject> getSubjectWiseMarksFor(Long studentId);
 }

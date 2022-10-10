@@ -16,4 +16,6 @@ public interface MarksService {
     Marks updateMarks(Marks oldMarks, Marks newMarks);
 
     void deleteMarks(Long id);
+
+    List<Marks> getMarksByStudent(Long studentId);
 }

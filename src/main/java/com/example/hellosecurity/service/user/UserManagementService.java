@@ -4,7 +4,6 @@ import com.example.hellosecurity.dto.user.UserDto;
 import com.example.hellosecurity.model.User;
 import com.example.hellosecurity.repository.user.UserRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -25,7 +24,7 @@ public class UserManagementService implements UserService {
         return userRepo.save(user);
     }
 
-    public Optional<User> getUserByNameAndPassword(String userName, String password){
-        return userRepo.findByUserNameIgnoreCaseAndPassword(userName, new BCryptPasswordEncoder().encode(password));
+    public Optional<User> getUserByNameAndPassword(String userName){
+        return userRepo.findByUserNameIgnoreCase(userName);
     }
 }

@@ -8,15 +8,15 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
+    
     @Query(
             value = """
-                SELECT s,m
+                SELECT s
                 FROM Subject s
-                JOIN Marks m
-                WHERE m.subjectId = s.id AND m.studentId = :studentId
+                JOIN FETCH s.marks m
+                WHERE m.student.id = :studentId
             """, nativeQuery = false
     )
-    public List<Subject> findMarksForEachSubjectFor(@Param("studentId") Integer studentId);
+    public List<Subject> findMarksForEachSubjectFor(@Param("studentId") Long studentId);
 
-//    public List<Subject> findByMarks();
 }

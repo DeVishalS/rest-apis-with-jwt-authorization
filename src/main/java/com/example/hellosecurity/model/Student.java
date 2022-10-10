@@ -30,7 +30,7 @@ public class Student {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="group_id")
-    private Group groupId;
+    private Group group;
 
     @Override
     public String toString() {

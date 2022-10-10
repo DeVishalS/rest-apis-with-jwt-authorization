@@ -16,4 +16,6 @@ public interface StudentService {
     Student updateStudent(Student oldStudent, Student newStudent);
 
     void deleteStudentById(Long id);
+
+    Long getNoOfStudentsFor(Long teacherId);
 }

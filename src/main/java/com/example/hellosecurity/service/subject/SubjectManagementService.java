@@ -45,4 +45,9 @@ public class SubjectManagementService implements SubjectService {
     public void deleteSubjectById(Long id){
         subjectRepo.deleteById(id);
     }
+
+    @Override
+    public List<Subject> getSubjectWiseMarksFor(Long studentId) {
+        return this.subjectRepo.findMarksForEachSubjectFor(studentId);
+    }
 }

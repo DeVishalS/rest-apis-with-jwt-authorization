@@ -1,19 +1,27 @@
 package com.example.hellosecurity.controller.user;
 
-import com.example.hellosecurity.dto.user.UserDto;
 import com.example.hellosecurity.model.User;
 import com.example.hellosecurity.service.user.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.authentication.BadCredentialsException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.List;
+
+record UserJwtTokenResponse(String userName, String token) {
+}
 
 @RestController
 public class UserController {
@@ -24,14 +32,19 @@ public class UserController {
         this.userService = userService;
     }
 
-
-    @PostMapping("userName")
-    public UserDto login(@RequestParam("userName") String username, @RequestParam("password") String password) {
+    @Operation
+    @SecurityRequirements
+    @PostMapping("user")
+    public UserJwtTokenResponse login(@RequestParam("userName") String userName, @RequestParam("password") String password) {
 
         // Here we can verify the userName credentials before granting userName a jwt token
-        User user = userService.getUserByNameAndPassword(username, password).orElseThrow(() -> new BadCredentialsException(String.format("User %s not found", username)));
-        String token = getJWTToken(user.getUserName(), user.getRole());
-        return UserDto.builder().userName(user.getUserName()).token(token).build();
+        User user = userService.getUserByNameAndPassword(userName).orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, String.format("User %s not found", userName)));
+        if (new BCryptPasswordEncoder().matches(password, user.getPassword())) {
+            String token = getJWTToken(user.getUserName(), user.getRole());
+            return new UserJwtTokenResponse(userName, token);
+        } else {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UserName or Password is incorrect");
+        }
 
     }
 

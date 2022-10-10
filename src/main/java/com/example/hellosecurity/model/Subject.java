@@ -26,7 +26,7 @@ public class Subject {
     @Column(name = "title")
     private String title;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subjectId")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private List<Marks> marks;
 
     @Override

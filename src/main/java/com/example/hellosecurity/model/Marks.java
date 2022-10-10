@@ -23,11 +23,11 @@ public class Marks {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
-    private Student studentId;
+    private Student student;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id")
-    private Subject subjectId;
+    private Subject subject;
 
     @Column(name = "date")
     private LocalDateTime date;

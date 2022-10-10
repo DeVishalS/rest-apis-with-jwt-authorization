@@ -46,4 +46,9 @@ public class StudentManagementService implements StudentService {
         studentRepo.deleteById(id);
     }
 
+    @Override
+    public Long getNoOfStudentsFor(Long teacherId) {
+        return studentRepo.getCountOfStudentsForTeacher(teacherId);
+    }
+
 }

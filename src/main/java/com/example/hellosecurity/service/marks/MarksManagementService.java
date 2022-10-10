@@ -45,4 +45,9 @@ public class MarksManagementService implements MarksService {
     public void deleteMarks(Long id){
         marksRepo.deleteById(id);
     }
+
+    @Override
+    public List<Marks> getMarksByStudent(Long studentId) {
+        return marksRepo.findByStudentId(studentId);
+    }
 }
