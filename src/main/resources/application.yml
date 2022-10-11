@@ -31,3 +31,7 @@ server:
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
+hello-security:
+  jwt:
+    ttl: 60000
+    secret: my-secret-key

@@ -10,6 +10,5 @@ import java.util.List;
 
 public interface MarksRepository extends JpaRepository<Marks, Long> {
 
-//    @Query("select m from Marks m where m.studentId.id = :studentId")
     public List<Marks> findByStudentId(@Param("studentId") Long studentId);
 }

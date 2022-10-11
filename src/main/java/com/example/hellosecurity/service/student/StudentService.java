@@ -13,7 +13,7 @@ public interface StudentService {
 
     List<Student> getAllStudents();
 
-    Student updateStudent(Student oldStudent, Student newStudent);
+    Student updateStudent(Student oldStudent, StudentDto newStudent);
 
     void deleteStudentById(Long id);
 

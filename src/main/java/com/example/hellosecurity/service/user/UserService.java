@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface UserService {
     User createUser(UserDto userDto);
 
-    Optional<User> getUserByNameAndPassword(String userName);
+    Optional<User> getUserByName(String userName);
 }

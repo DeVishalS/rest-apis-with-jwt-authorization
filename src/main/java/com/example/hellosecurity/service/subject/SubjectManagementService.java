@@ -36,7 +36,7 @@ public class SubjectManagementService implements SubjectService {
     }
 
     @Override
-    public Subject updateSubject(Subject oldSubject, Subject newSubject){
+    public Subject updateSubject(Subject oldSubject, SubjectDto newSubject){
         BeanUtils.copyProperties(newSubject, oldSubject);
         return subjectRepo.save(oldSubject);
     }

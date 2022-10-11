@@ -1,3 +1,4 @@
+
 package com.example.hellosecurity.service.teacher;
 
 import com.example.hellosecurity.dto.teacher.TeacherDto;
@@ -13,7 +14,7 @@ public interface TeacherService {
 
     List<Teacher> getAllTeachers();
 
-    Teacher updateTeacher(Teacher oldTeacher, Teacher newTeacher);
+    Teacher updateTeacher(Teacher oldTeacher, TeacherDto newTeacher);
 
     void deleteTeacherById(Long id);
 }

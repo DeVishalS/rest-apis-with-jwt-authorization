@@ -24,7 +24,7 @@ public class UserManagementService implements UserService {
         return userRepo.save(user);
     }
 
-    public Optional<User> getUserByNameAndPassword(String userName){
+    public Optional<User> getUserByName(String userName){
         return userRepo.findByUserNameIgnoreCase(userName);
     }
 }

@@ -11,11 +11,11 @@ public interface MarksService {
 
     Optional<Marks> getMarksById(Long id);
 
-    List<Marks> getAllMarsk();
+    List<Marks> getAllMarks();
 
-    Marks updateMarks(Marks oldMarks, Marks newMarks);
+    Marks updateMarks(Marks oldMarks, MarksDto newMarks);
 
-    void deleteMarks(Long id);
+    void deleteMarksById(Long id);
 
     List<Marks> getMarksByStudent(Long studentId);
 }

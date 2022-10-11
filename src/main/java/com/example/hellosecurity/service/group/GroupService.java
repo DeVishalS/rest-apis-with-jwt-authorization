@@ -11,7 +11,7 @@ public interface GroupService {
     Group createGroup(GroupDto groupDto);
     Optional<Group> getGroupById(Long groupId);
     List<Group> getAllGroups();
-    Group updateGroup(Group oldGroup, Group newGroup);
-    void deleteGroup(Long id);
+    Group updateGroup(Group oldGroup, GroupDto newGroup);
+    void deleteGroupById(Long id);
 
 }

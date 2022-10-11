@@ -31,18 +31,18 @@ public class MarksManagementService implements MarksService {
     }
 
     @Override
-    public List<Marks> getAllMarsk(){
+    public List<Marks> getAllMarks(){
         return marksRepo.findAll();
     }
 
     @Override
-    public Marks updateMarks(Marks oldMarks, Marks newMarks){
+    public Marks updateMarks(Marks oldMarks, MarksDto newMarks){
         BeanUtils.copyProperties(newMarks, oldMarks);
         return marksRepo.save(oldMarks);
     }
 
     @Override
-    public void deleteMarks(Long id){
+    public void deleteMarksById(Long id){
         marksRepo.deleteById(id);
     }
 

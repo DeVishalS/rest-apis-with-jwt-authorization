@@ -36,7 +36,7 @@ public class TeacherManagementService implements TeacherService {
     }
 
     @Override
-    public Teacher updateTeacher(Teacher oldTeacher, Teacher newTeacher) {
+    public Teacher updateTeacher(Teacher oldTeacher, TeacherDto newTeacher) {
         BeanUtils.copyProperties(newTeacher, oldTeacher);
         return teacherRepo.save(oldTeacher);
     }

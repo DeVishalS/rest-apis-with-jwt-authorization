@@ -38,13 +38,13 @@ public class GroupManagementService implements GroupService {
     }
 
     @Override
-    public Group updateGroup(Group oldGroup, Group newGroup) {
+    public Group updateGroup(Group oldGroup, GroupDto newGroup) {
         BeanUtils.copyProperties(newGroup,oldGroup);
         return groupRepository.save(oldGroup);
     }
 
     @Override
-    public void deleteGroup(Long id) {
+    public void deleteGroupById(Long id) {
         groupRepository.deleteById(id);
     }
 }

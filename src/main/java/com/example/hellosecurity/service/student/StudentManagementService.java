@@ -36,7 +36,7 @@ public class StudentManagementService implements StudentService {
     }
 
     @Override
-    public Student updateStudent(Student oldStudent, Student newStudent){
+    public Student updateStudent(Student oldStudent, StudentDto newStudent){
         BeanUtils.copyProperties(newStudent, oldStudent);
         return studentRepo.save(oldStudent);
     }
