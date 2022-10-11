@@ -1,11 +1,9 @@
 package com.example.hellosecurity.security;
 
 import io.jsonwebtoken.*;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -17,12 +15,13 @@ import java.util.List;
 
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
-	private String secretKey;
+	private final String secretKey;
 
 	public JWTAuthorizationFilter(String secretKey){
 		this.secretKey = secretKey;
 	}
 
+	public static final String AUTHORITIES = "authorities";
 	private static final String HEADER = "Authorization";
 	private static final String PREFIX = "Bearer ";
 
@@ -31,7 +30,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 		try {
 			if (checkJWTToken(request, response)) {
 				Claims claims = validateToken(request);
-				if (claims.get("authorities") != null) {
+				if (claims.get(AUTHORITIES) != null) {
 					setUpSpringAuthentication(claims);
 				} else {
 					SecurityContextHolder.clearContext();
@@ -58,7 +57,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 	 */
 	private void setUpSpringAuthentication(Claims claims) {
 		@SuppressWarnings("unchecked")
-		List<String> authorities = (List) claims.get("authorities");
+		List<String> authorities = (List) claims.get(AUTHORITIES);
 
 		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(claims.getSubject(), null,
 				authorities.stream().map(SimpleGrantedAuthority::new).toList());

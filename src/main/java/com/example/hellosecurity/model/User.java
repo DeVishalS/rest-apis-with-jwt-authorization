@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +23,9 @@ public class User {
     String userName;
     String password;
     String role;
+    Boolean active;
+    Integer invalidAttempts;
+    LocalDateTime lockedUntil;
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,6 @@
 package com.example.hellosecurity.controller.user;
 
+import com.example.hellosecurity.dto.user.UserJwtTokenResponse;
 import com.example.hellosecurity.model.User;
 import com.example.hellosecurity.service.user.UserService;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -28,15 +30,15 @@ class UserControllerTest {
 
     @Mock
     PasswordEncoder passwordEncoder;
-    private User user = new User(101L, "someuser", "somepwd", "ROLE_USER");;
+    private User user = new User(101L, "someuser", "somepwd", "ROLE_USER",true,0,null);
 
     @Test
     void test_Login_when_user_found_with_correct_credentials() {
         when(userService.getUserByName(anyString())).thenReturn(Optional.of(user));
         when(passwordEncoder.matches(anyString(),anyString())).thenReturn(true);
-        UserJwtTokenResponse jwtTokenResponse = userController.login("someuser", "somepwd");
-        assertNotNull(jwtTokenResponse);
-        assertEquals("someuser", jwtTokenResponse.userName());
+        ResponseEntity jwtResponse = userController.login("someuser", "somepwd");
+        assertNotNull(jwtResponse);
+        assertEquals("someuser", ((UserJwtTokenResponse)jwtResponse.getBody()).userName());
     }
 
     @Test
